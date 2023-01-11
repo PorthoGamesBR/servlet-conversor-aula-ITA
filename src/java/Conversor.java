@@ -25,6 +25,7 @@ public class Conversor extends HttpServlet {
         
         String celsius = request.getParameter("celsius");
         float c = Float.parseFloat(celsius);
+        float f = ((c * 9) / 5) + 32;
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -36,7 +37,7 @@ public class Conversor extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Celsius: " + celsius + "</h1>");
-            out.println("<h1>Fahrenheit: " + request.getContextPath() + "</h1>");
+            out.println("<h1>Fahrenheit: " + f + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
