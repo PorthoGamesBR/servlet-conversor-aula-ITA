@@ -22,10 +22,21 @@ public class Conversor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String conversion = request.getParameter("type");
+        float c = 0;
+        float f = 0;
+        if(conversion.equals("celsius")){
+            String celsius = request.getParameter(conversion);
+            c = Float.parseFloat(celsius);
+            f = ((c * 9) / 5) + 32;
+        }
+        if(conversion.equals("fahr")){
+            String fahr = request.getParameter(conversion);
+            f = Float.parseFloat(fahr);
+            c = ((f - 32) * 5) / 9;
+        }
         
-        String celsius = request.getParameter("celsius");
-        float c = Float.parseFloat(celsius);
-        float f = ((c * 9) / 5) + 32;
+        
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -36,7 +47,7 @@ public class Conversor extends HttpServlet {
             out.println("<title>Convertido</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Celsius: " + celsius + "</h1>");
+            out.println("<h1>Celsius: " + c + "</h1>");
             out.println("<h1>Fahrenheit: " + f + "</h1>");
             out.println("</body>");
             out.println("</html>");
